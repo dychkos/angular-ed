@@ -1,3 +1,4 @@
 <h4>Hello Angular</h4>
 <app-my></app-my>
-<app-aquariums></app-aquariums>
+
+<app-aquariums *ngFor="let aqua of aquariums" [aqua]="aqua"></app-aquariums>

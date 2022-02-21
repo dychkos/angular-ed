@@ -1,12 +1,32 @@
-<h1> Акваріум: {{name}} </h1>
-<p> Тип: {{type}}</p>
-<p> Вместимость: {{capacity}}</p>
+<h1 [ngClass]="{long: isLong()}"> Акваріум: {{aqua.name}} </h1>
 
-<p>
-  {{fishSpecies}}
-</p>
+<div *ngIf="showInfo; then btnHide else btnShow"></div>
+<ng-template #btnHide>
+  <button (click)="showInfo = false">Показати менше</button>
+</ng-template>
+<ng-template #btnShow>
+  <button (click)="showInfo = true">Показати більше</button>
+</ng-template>
 
-<div class="img-wrapper">
-  <img src="{{curImage}}" class="img">
+<div class="additional" *ngIf="showInfo">
+  <div class="edit-name">
+    <input type="text" [(ngModel)]="aqua.name" class="edit-name">
+  </div>
+
+  <p> Тип: {{aqua.type}}</p>
+  <p> Місткість: {{aqua.capacity}}</p>
+
+  <p>
+    {{aqua.fishSpecies}}
+  </p>
+
+  <div class="img-nav">
+    <button class="img-prev" (click)="changeCurImage(false)"> Prev </button>
+    <button class="img-next" (click)="changeCurImage(true)" > Next </button>
+  </div>
+
+  <div class="img-wrapper">
+    <img [src]="curImage" class="img">
+  </div>
+
 </div>
-

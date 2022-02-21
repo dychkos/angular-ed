@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AquaType} from "../app.component";
 
 @Component({
   selector: 'app-aquariums',
@@ -7,19 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AquariumsComponent implements OnInit {
 
-  name = "Big Sea";
-  type = "circle";
+  @Input()
+  aqua!: AquaType;
 
-  capacity = 150;
-
-  fishSpecies = [
-    'Silver Angelfish',
-    'Neon Tetra',
-    'Zebrafish',
-    'Common Goldfish',
-    'Black Skirt Tetra',
-    'Rainbow Platy'
-  ];
+  showInfo = false
 
   fishImages = [
     'https://i.pinimg.com/236x/85/b4/62/85b46226862a50fa64a63ba1c67993e4--aquarium-fish-for-sale-tropical-aquarium.jpg',
@@ -30,18 +22,39 @@ export class AquariumsComponent implements OnInit {
   curImageIndex = 0;
   curImage: string | undefined;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.curImage = this.fishImages[this.curImageIndex];
     setInterval(()=>{
-      this.curImageIndex++;
-      if(this.curImageIndex >= this.fishImages.length){
-        this.curImageIndex = 0;
-      }
-      this.curImage = this.fishImages[this.curImageIndex];
-    },1500);
+      this.changeCurImage(true);
+    },12000);
+  }
 
+  changeCurImage(forward:boolean) {
+    forward ? this.curImageIndex++ : this.curImageIndex--;
+
+    if(this.curImageIndex >= this.fishImages.length) {
+      this.curImageIndex = 0;
+    }
+
+    if(this.curImageIndex < 0) {
+      this.curImageIndex = this.fishImages.length - 1;
+    }
+
+    this.curImage = this.fishImages[this.curImageIndex];
+
+  }
+
+  changeAquaName(name:string){
+    // @ts-ignore
+    this.aqua.name = name;
+  }
+
+  isLong(){
+    // @ts-ignore
+    return this.aqua.name.length > 10;
   }
 
 }
