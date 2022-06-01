@@ -1,4 +1,13 @@
-<h4>Hello Angular</h4>
-<app-my></app-my>
+<nav>
+  <div class="nav-wrapper">
+    <a href="" class="brand-logo">Акваріуми</a>
+  </div>
+</nav>
+<div class="container">
+  <app-new-aqua (aqua)="addAqua($event)"></app-new-aqua>
+  <app-aquariums
+    *ngFor="let aqua of aquariums" [aqua]="aqua" (aqua)="removeAqua($event)">
+  </app-aquariums>
 
-<app-aquariums *ngFor="let aqua of aquariums" [aqua]="aqua"></app-aquariums>
+</div>
+

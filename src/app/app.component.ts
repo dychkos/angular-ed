@@ -34,6 +34,17 @@ export class AppComponent {
       ]
     }
   ]
+
+  //@ts-ignore
+  addAqua(aqua){
+    this.aquariums.push(aqua);
+  }
+
+  //@ts-ignore
+  removeAqua(aqua){
+    let aquariums = this.aquariums.filter(item => item.name == aqua.name);
+    this.aquariums = {...aquariums}
+  }
 }
 
 export interface AquaType {

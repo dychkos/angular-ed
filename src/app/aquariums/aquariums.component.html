@@ -1,32 +1,35 @@
-<h1 [ngClass]="{long: isLong()}"> Акваріум: {{aqua.name}} </h1>
-
-<div *ngIf="showInfo; then btnHide else btnShow"></div>
-<ng-template #btnHide>
-  <button (click)="showInfo = false">Показати менше</button>
-</ng-template>
-<ng-template #btnShow>
-  <button (click)="showInfo = true">Показати більше</button>
-</ng-template>
-
-<div class="additional" *ngIf="showInfo">
-  <div class="edit-name">
-    <input type="text" [(ngModel)]="aqua.name" class="edit-name">
+<div class="row valign-wrapper">
+  <div class="col m3 offset-m3 s6 center-align">
+    <h5>{{aqua.name}}</h5>
   </div>
-
-  <p> Тип: {{aqua.type}}</p>
-  <p> Місткість: {{aqua.capacity}}</p>
-
-  <p>
-    {{aqua.fishSpecies}}
-  </p>
-
-  <div class="img-nav">
-    <button class="img-prev" (click)="changeCurImage(false)"> Prev </button>
-    <button class="img-next" (click)="changeCurImage(true)" > Next </button>
+  <div class="col m3 s6 center-align">
+    <a class="btn-floating waves-effect waves-light blue" (click)="showInfo = !showInfo">
+      <i *ngIf="showInfo" class="material-icons">
+        keyboard_arrow_up
+      </i>
+      <i *ngIf="!showInfo" class="material-icons">
+        keyboard_arrow_down
+      </i>
+    </a>
   </div>
+</div>
 
-  <div class="img-wrapper">
-    <img [src]="curImage" class="img">
+<div class="info" *ngIf="showInfo">
+  <div class="input-field">
+    <input type="text" id="name" [(ngModel)]="aqua.name" class="validate">
+    <label for="name">Назва акваріуму</label>
   </div>
-
+  <div class="input-field">
+    <input type="text" id="type" [(ngModel)]="aqua.type" class="validate">
+    <label for="type">Тип</label>
+  </div>
+  <div class="input-field">
+    <input type="number" id="capacity" [(ngModel)]="aqua.capacity" class="validate">
+    <label for="capacity">Місткість</label>
+  </div>
+  <a class="btn-floating waves-effect waves-light blue" (click)="onRemove(aqua)">
+    <i class="material-icons">
+      remove
+    </i>
+  </a>
 </div>
