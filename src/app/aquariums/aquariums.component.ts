@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AquaType} from "../app.component";
+import {AquariumsDataService, AquaType} from "../services/aquariums-data.service";
 
 @Component({
   selector: 'app-aquariums',
@@ -10,13 +10,17 @@ export class AquariumsComponent implements OnInit {
 
   @Input()
   aqua!: AquaType;
+  @Input()
+  aquaIndex!: number;
 
   showInfo = false
 
   @Output() aq = new EventEmitter();
 
 
-  constructor() {
+  constructor(private aquariumsDataService: AquariumsDataService)
+  {
+
   }
 
   changeAquaName(name:string){
@@ -24,14 +28,10 @@ export class AquariumsComponent implements OnInit {
     this.aqua.name = name;
   }
 
-  isLong(){
-    // @ts-ignore
-    return this.aqua.name.length > 10;
+  deleteAqua() {
+    this.aquariumsDataService.deleteAquarium(this.aquaIndex);
   }
-  //@ts-ignore
-  onRemove(aqua){
-    this.aq.emit(aqua);
-  }
+
 
   ngOnInit(): void {
   }

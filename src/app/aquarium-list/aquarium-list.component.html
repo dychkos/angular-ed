@@ -1,0 +1,8 @@
+<div>
+  <h5>Aquariums</h5>
+  <app-new-aqua></app-new-aqua>
+  <app-aquariums
+    *ngFor="let aqua of aquariums; let i = index"
+    [aqua]="aqua" [aquaIndex]="i">
+  </app-aquariums>
+</div>

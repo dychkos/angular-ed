@@ -4,10 +4,6 @@
   </div>
 </nav>
 <div class="container">
-  <app-new-aqua (aqua)="addAqua($event)"></app-new-aqua>
-  <app-aquariums
-    *ngFor="let aqua of aquariums" [aqua]="aqua" (aqua)="removeAqua($event)">
-  </app-aquariums>
-
+  <router-outlet></router-outlet>
 </div>
 
